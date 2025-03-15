@@ -1,0 +1,67 @@
+.QRScanner {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .controls {
+    margin: 20px 0;
+  }
+  
+  .scan-button {
+    padding: 12px 24px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .scan-button.start {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .scan-button.stop {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .scan-button:hover {
+    opacity: 0.9;
+  }
+  
+  .refresh-button {
+    margin-left: 15px;
+    padding: 12px 24px;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .refresh-button:hover {
+    opacity: 0.9;
+  }
+  
+  .qr-reader-container {
+    margin: 20px auto;
+    width: 100%;
+    max-width: 500px;
+  }
+  
+  .scan-result {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    word-break: break-all;
+  }
+  
+  .scan-result h3 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+  }

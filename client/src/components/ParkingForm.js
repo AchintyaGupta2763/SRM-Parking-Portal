@@ -1,0 +1,142 @@
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom"; // Import useLocation
+import { useAuth } from '../context/AuthContext';
+import "./ParkingForm.css";
+
+const ParkingForm = () => {
+    const { user } = useAuth();
+    const location = useLocation();
+    
+    // Get parkingArea from navigation state, default to "Area 1" if not provided
+    const selectedParkingArea = location.state?.parkingArea || "Area 1";
+
+    const [formData, setFormData] = useState({
+        name: user?.username || "",
+        category: "Visitor",
+        vehicleType: "bike",
+        vehicleBrand: "",
+        vehicleNumber: "",
+        vehicleColor: "",
+        fromDate: "",
+        toDate: "",
+        parkingArea: selectedParkingArea, // Set parkingArea from LandingPage selection
+    });
+
+    useEffect(() => {
+        setFormData((prevData) => ({
+            ...prevData,
+            parkingArea: selectedParkingArea
+        }));
+    }, [selectedParkingArea]);
+
+    const handleChange = (e) => {
+        let { name, value } = e.target;
+        if (name === "vehicleNumber") value = value.toUpperCase();
+        setFormData({ ...formData, [name]: value });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await fetch("http://localhost:5000/api/parking/request", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData),
+            });
+
+            const data = await response.json();
+            if (data.success) {
+                alert("Parking request submitted successfully!");
+                setFormData({
+                    name: user?.username || "",
+                    category: "Visitor",
+                    vehicleType: "car",
+                    vehicleBrand: "",
+                    vehicleNumber: "",
+                    vehicleColor: "",
+                    fromDate: "",
+                    toDate: "",
+                    parkingArea: selectedParkingArea, // Reset with the same selected area
+                });
+            } else {
+                alert("Failed to submit request. Please try again.");
+            }
+        } catch (error) {
+            alert("Error submitting request. Check console for details.");
+            console.error(error);
+        }
+    };
+
+    return (
+        <div className="parking-form-container">
+            <h2>Parking Request Form</h2>
+            <form onSubmit={handleSubmit}>
+                <label>
+                    Name:
+                    <input type="text" name="name" value={formData.name} onChange={handleChange} required />
+                </label>
+
+                <label>
+                    Category:
+                    <select name="category" value={formData.category} onChange={handleChange}>
+                        <option value="Visitor">Visitor</option>
+                        <option value="Faculty">Faculty</option>
+                        <option value="Student">Student</option>
+                        <option value="Parents">Parents</option>
+                    </select>
+                </label>
+
+                <label>
+                    Vehicle Type:
+                    <select name="vehicleType" value={formData.vehicleType} onChange={handleChange}>
+                        <option value="car">Car</option>
+                        <option value="bike">Bike</option>
+                        <option value="scooty">Scooty</option>
+                    </select>
+                </label>
+
+                <label>
+                    Vehicle Brand:
+                    <input type="text" name="vehicleBrand" value={formData.vehicleBrand} onChange={handleChange} required />
+                </label>
+
+                <label>
+                    Vehicle Number:
+                    <input type="text" name="vehicleNumber" value={formData.vehicleNumber} onChange={handleChange} required />
+                </label>
+
+                <label>
+                    Vehicle Color:
+                    <input type="text" name="vehicleColor" value={formData.vehicleColor} onChange={handleChange} required />
+                </label>
+
+                <div className="calendar-container">
+                    <label>
+                        From Date:
+                        <input type="date" name="fromDate" value={formData.fromDate} onChange={handleChange} required />
+                    </label>
+                    <label>
+                        To Date:
+                        <input type="date" name="toDate" value={formData.toDate} onChange={handleChange} required />
+                    </label>
+                </div>
+
+                <label>
+                    Parking Area:
+                    <select name="parkingArea" value={formData.parkingArea} onChange={handleChange}>
+                        <option value="Area 1">Area 1</option>
+                        <option value="Area 2">Area 2</option>
+                        <option value="Area 3">Area 3</option>
+                        <option value="Area 4">Area 4</option>
+                        <option value="Area 5">Area 5</option>
+                        <option value="Area 6">Area 6</option>
+                    </select>
+                </label>
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    );
+};
+
+export default ParkingForm;

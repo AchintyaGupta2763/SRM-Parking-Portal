@@ -1,0 +1,143 @@
+.admin-history-container {
+    max-width: 90%;
+    margin: 15px auto;
+    padding: 15px;
+    background: #ffffff;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+}
+
+/* Header */
+h2 {
+    text-align: center;
+    color: #333;
+    font-size: 18px;
+    margin-bottom: 12px;
+}
+
+/* Wrapped Filter Section */
+.filter-section {
+    background: #f8f9fa;
+    padding: 12px;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+}
+
+/* Filters */
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+}
+
+.filters input,
+.filters select,
+.filters button {
+    padding: 6px;
+    font-size: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    min-width: 120px;
+}
+
+.filters button {
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.filters button:hover {
+    background-color: #0056b3;
+}
+
+/* Table Styling */
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+}
+
+th, td {
+    padding: 8px;
+    text-align: center;
+    border: 1px solid #ddd;
+    font-size: 12px;
+}
+
+th {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Status Colors */
+.status-approved {
+    color: green;
+    font-weight: bold;
+}
+
+.status-rejected {
+    color: red;
+    font-weight: bold;
+}
+
+/* No Data Message */
+.no-results {
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: #888;
+    margin-top: 15px;
+}
+
+/* Responsive Design */
+@media (max-width: 700px) {
+    .admin-history-container {
+        max-width: 95%;
+        padding: 10px;
+    }
+
+    h2 {
+        font-size: 16px;
+    }
+
+    .filter-section {
+        padding: 8px;
+    }
+
+    .filters {
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .filters input,
+    .filters select,
+    .filters button {
+        width: 100%;
+        font-size: 12px;
+    }
+
+    th, td {
+        font-size: 10px;
+        padding: 6px;
+    }
+}
+
+@media (max-width: 400px) {
+    th, td {
+        font-size: 9px;
+        padding: 5px;
+    }
+
+    .filters {
+        gap: 5px;
+    }
+}

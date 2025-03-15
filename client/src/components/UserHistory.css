@@ -1,0 +1,71 @@
+.user-history-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 15px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .user-history-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .applications-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .application-card {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .application-card p {
+    margin: 5px 0;
+  }
+  
+  .download-btn {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.3s ease;
+  }
+  
+  .download-btn:hover {
+    background: #0056b3;
+  }
+  
+  .error-message {
+    color: red;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 400px) {
+    .user-history-container {
+      width: 95%;
+      padding: 10px;
+    }
+    .application-card {
+      padding: 10px;
+      font-size: 13px;
+    }
+    .download-btn {
+      width: 100%;
+      text-align: center;
+    }
+  }
+  

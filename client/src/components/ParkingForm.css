@@ -1,0 +1,70 @@
+.parking-form-container {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.calendar-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.calendar-container label {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.calendar-container label:last-child {
+    margin-right: 0;
+}
+
+button {
+    margin-top: 15px;
+    padding: 10px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+@media (max-width: 480px) {
+    .calendar-container {
+        flex-direction: column;
+    }
+
+    .calendar-container label {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+}
