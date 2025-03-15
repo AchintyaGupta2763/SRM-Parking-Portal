@@ -10,10 +10,12 @@ const Signup = () => {
     const [formData, setFormData] = useState({
         username: '',
         email: '',
-        password: ''
+        password: '',
+        otp: ''
     });
     const [errors, setErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isOTPSignup, setIsOTPSignup] = useState(false); // Toggle between OTP and password signup
 
     const validateForm = () => {
         const newErrors = {};
@@ -29,10 +31,14 @@ const Signup = () => {
             newErrors.email = 'Email is invalid';
         }
 
-        if (!formData.password) {
+        if (!isOTPSignup && !formData.password) {
             newErrors.password = 'Password is required';
-        } else if (formData.password.length < 6) {
+        } else if (!isOTPSignup && formData.password.length < 6) {
             newErrors.password = 'Password must be at least 6 characters';
+        }
+
+        if (isOTPSignup && !formData.otp) {
+            newErrors.otp = 'OTP is required';
         }
 
         return newErrors;
@@ -44,7 +50,6 @@ const Signup = () => {
             ...prev,
             [name]: value
         }));
-        // Clear error when user starts typing
         if (errors[name]) {
             setErrors(prev => ({
                 ...prev,
@@ -60,7 +65,20 @@ const Signup = () => {
         if (Object.keys(newErrors).length === 0) {
             setIsSubmitting(true);
             try {
-                const response = await axios.post('http://localhost:5000/api/auth/signup', formData);
+                let response;
+                if (isOTPSignup) {
+                    response = await axios.post('http://localhost:5000/api/auth/verify-signup-otp', {
+                        username: formData.username,
+                        email: formData.email,
+                        otp: formData.otp
+                    });
+                } else {
+                    response = await axios.post('http://localhost:5000/api/auth/signup', {
+                        username: formData.username,
+                        email: formData.email,
+                        password: formData.password
+                    });
+                }
                 if (response.data.success) {
                     login(response.data.user, response.data.token);
                     navigate('/dashboard');
@@ -73,6 +91,22 @@ const Signup = () => {
             setIsSubmitting(false);
         } else {
             setErrors(newErrors);
+        }
+    };
+
+    const handleGenerateOTP = async () => {
+        if (!formData.email) {
+            setErrors({ email: 'Email is required' });
+            return;
+        }
+        try {
+            await axios.post('http://localhost:5000/api/auth/signup-with-otp', {
+                username: formData.username,
+                email: formData.email
+            });
+            alert('OTP sent to your email');
+        } catch (error) {
+            setErrors({ submit: error.response?.data?.message || 'Error generating OTP' });
         }
     };
 
@@ -105,17 +139,36 @@ const Signup = () => {
                     {errors.email && <div className="error">{errors.email}</div>}
                 </div>
 
-                <div className="form-group">
-                    <label htmlFor="password">Password</label>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        value={formData.password}
-                        onChange={handleChange}
-                    />
-                    {errors.password && <div className="error">{errors.password}</div>}
-                </div>
+                {!isOTPSignup && (
+                    <div className="form-group">
+                        <label htmlFor="password">Password</label>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            value={formData.password}
+                            onChange={handleChange}
+                        />
+                        {errors.password && <div className="error">{errors.password}</div>}
+                    </div>
+                )}
+
+                {isOTPSignup && (
+                    <div className="form-group">
+                        <label htmlFor="otp">OTP</label>
+                        <input
+                            type="text"
+                            id="otp"
+                            name="otp"
+                            value={formData.otp}
+                            onChange={handleChange}
+                        />
+                        {errors.otp && <div className="error">{errors.otp}</div>}
+                        <button type="button" onClick={handleGenerateOTP} className="otp-button">
+                            Send OTP
+                        </button>
+                    </div>
+                )}
 
                 {errors.submit && <div className="error">{errors.submit}</div>}
 
@@ -129,6 +182,14 @@ const Signup = () => {
             </form>
 
             <div className="auth-link">
+                <button 
+                    type="button" 
+                    onClick={() => setIsOTPSignup(!isOTPSignup)}
+                    className="toggle-button"
+                >
+                    {isOTPSignup ? 'Sign Up with Password' : 'Sign Up with OTP'}
+                </button>
+                <br />
                 Already have an account? <Link to="/login">Login</Link>
             </div>
         </div>
