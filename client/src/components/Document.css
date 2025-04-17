@@ -1,0 +1,118 @@
+.documentation-page {
+    text-align: center;
+    padding: 10px;
+  }
+  
+  .documentation-page h1 {
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .documentation-page .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    justify-content: center;
+    padding: 5px;
+  }
+  
+  .documentation-page .team-card {
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    transition: transform 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    min-height: 400px; /* Changed from fixed height to min-height */
+  }
+  
+  .documentation-page .team-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .documentation-page .team-photo-container {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .documentation-page .team-photo {
+    width: auto;
+    height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+  }
+  
+  .documentation-page .team-card h3 {
+    margin: 10px 0;
+    color: #2c3e50;
+    font-size: 1.5rem;
+    /* Removed text truncation */
+  }
+  
+  .documentation-page .team-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .documentation-page .team-info p {
+    margin: 5px 0;
+    color: #555;
+    line-height: 1.4; /* Slightly increased line height */
+    font-size: 0.88rem;
+    word-break: break-word; /* Ensures text breaks properly */
+  }
+  
+  .documentation-page .team-info p strong {
+    color: #333;
+    margin-right: 5px;
+  }
+  
+  .documentation-page .team-card a {
+    color: #3498db;
+    text-decoration: none;
+    word-break: break-all; /* Handles long URLs/emails */
+  }
+  
+  .documentation-page .team-card a:hover {
+    text-decoration: underline;
+    color: #2980b9;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .documentation-page .team-grid {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    
+    .documentation-page .team-photo-container {
+      height: 180px;
+    }
+  }
+  
+  @media (max-width: 520px) {
+    .documentation-page .team-grid {
+      grid-template-columns: 1fr;
+      padding: 10px;
+      gap: 15px;
+    }
+    
+    .documentation-page .team-card {
+      min-height: auto; /* Let cards size naturally */
+      padding: 15px;
+    }
+    
+    .documentation-page .team-photo-container {
+      height: 160px;
+    }
+  }

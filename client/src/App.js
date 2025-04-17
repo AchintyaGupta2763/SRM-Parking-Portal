@@ -11,6 +11,7 @@ import UserHistory from './components/UserHistory';
 import AdminHistory from './components/AdminHistory';
 import Access from './components/Access';
 import QRScanner from "./components/QRScanner";
+import Document from "./components/Document";
 
 // Protected Route component
 const ProtectedRoute = ({ children }) => {
@@ -35,7 +36,8 @@ const AppRoutes = () => {
             {user && <Navbar />}
             <Routes>
                 <Route path="/login" element={user ? <Navigate to="/home" /> : <Login />} />
-                <Route path="/signup" element={user ? <Navigate to="/home" /> : <Signup />} />
+                <Route path="/signup" element={user ? <Navigate to="/home" /> : <Signup />} /> 
+                <Route path="/documentation" element={<Document />} />
                 <Route path="/home" element={<ProtectedRoute><LandingPage /></ProtectedRoute>} />
                 
                 {/* New Route for Parking Form */}

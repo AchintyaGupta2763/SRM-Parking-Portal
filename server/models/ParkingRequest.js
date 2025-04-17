@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const ParkingRequestSchema = new mongoose.Schema({
     name: { type: String, required: true },
     category: { type: String, enum: ["Visitor", "Faculty", "Student", "Parents"], required: true },
-    vehicleType: { type: String, enum: ["car", "bike", "scooty"], required: true },
+    vehicleType: { type: String, enum: ["Two Wheeler", "Four Wheeler", "Others"], required: true },
     vehicleBrand: { type: String, required: true },
     vehicleNumber: { type: String, required: true, uppercase: true },
     vehicleColor: { type: String, required: true },

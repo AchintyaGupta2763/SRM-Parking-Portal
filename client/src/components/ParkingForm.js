@@ -1,38 +1,42 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom"; // Import useLocation
-import { useAuth } from '../context/AuthContext';
+import { useLocation } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import "./ParkingForm.css";
 
 const ParkingForm = () => {
     const { user } = useAuth();
     const location = useLocation();
-    
-    // Get parkingArea from navigation state, default to "Area 1" if not provided
-    const selectedParkingArea = location.state?.parkingArea || "Area 1";
+    const selectedParkingArea = location.state?.parkingArea || "Main Campus";
 
     const [formData, setFormData] = useState({
         name: user?.username || "",
         category: "Visitor",
-        vehicleType: "bike",
+        vehicleType: "Two Wheeler",
         vehicleBrand: "",
         vehicleNumber: "",
         vehicleColor: "",
         fromDate: "",
         toDate: "",
-        parkingArea: selectedParkingArea, // Set parkingArea from LandingPage selection
+        parkingArea: selectedParkingArea,
     });
 
     useEffect(() => {
         setFormData((prevData) => ({
             ...prevData,
-            parkingArea: selectedParkingArea
+            parkingArea: selectedParkingArea,
         }));
     }, [selectedParkingArea]);
 
     const handleChange = (e) => {
         let { name, value } = e.target;
         if (name === "vehicleNumber") value = value.toUpperCase();
-        setFormData({ ...formData, [name]: value });
+
+        // Reset brand when type changes
+        if (name === "vehicleType") {
+            setFormData({ ...formData, vehicleType: value, vehicleBrand: "" });
+        } else {
+            setFormData({ ...formData, [name]: value });
+        }
     };
 
     const handleSubmit = async (e) => {
@@ -50,13 +54,13 @@ const ParkingForm = () => {
                 setFormData({
                     name: user?.username || "",
                     category: "Visitor",
-                    vehicleType: "car",
+                    vehicleType: "Two Wheeler",
                     vehicleBrand: "",
                     vehicleNumber: "",
                     vehicleColor: "",
                     fromDate: "",
                     toDate: "",
-                    parkingArea: selectedParkingArea, // Reset with the same selected area
+                    parkingArea: selectedParkingArea,
                 });
             } else {
                 alert("Failed to submit request. Please try again.");
@@ -67,13 +71,29 @@ const ParkingForm = () => {
         }
     };
 
+    const vehicleBrands = {
+        "Two Wheeler": [
+            "Royal Enfield", "Hero MotoCorp", "Honda Motorcycle", "TVS", "Bajaj",
+            "Yamaha", "Suzuki Bikes", "KTM", "Jawa", "Benelli",
+            "Ather Energy", "Ola Electric", "Bajaj Chetak", "TVS iQube",
+            "Hero Electric", "Simple Energy", "Ampere", "Okaya", "Bounce", "other"
+        ],
+        "Four Wheeler": [
+            "Maruti Suzuki", "Hyundai", "Tata Motors", "Mahindra", "Honda Cars",
+            "Toyota", "Kia", "Renault", "Volkswagen", "Skoda", "other"
+        ],
+        "Others": ["Tractor", "E-Rickshaw", "Forklift", "Mini Truck", "other"]
+    };
+
+    const filteredBrands = vehicleBrands[formData.vehicleType] || [];
+
     return (
         <div className="parking-form-container">
             <h2>Parking Request Form</h2>
             <form onSubmit={handleSubmit}>
                 <label>
                     Name:
-                    <input type="text" name="name" value={formData.name} onChange={handleChange} required />
+                    <input type="text" name="name" value={formData.name} onChange={handleChange} readOnly required />
                 </label>
 
                 <label>
@@ -89,15 +109,25 @@ const ParkingForm = () => {
                 <label>
                     Vehicle Type:
                     <select name="vehicleType" value={formData.vehicleType} onChange={handleChange}>
-                        <option value="car">Car</option>
-                        <option value="bike">Bike</option>
-                        <option value="scooty">Scooty</option>
+                        <option value="Two Wheeler">Two Wheeler</option>
+                        <option value="Four Wheeler">Four Wheeler</option>
+                        <option value="Others">Others</option>
                     </select>
                 </label>
 
                 <label>
                     Vehicle Brand:
-                    <input type="text" name="vehicleBrand" value={formData.vehicleBrand} onChange={handleChange} required />
+                    <select
+                        name="vehicleBrand"
+                        value={formData.vehicleBrand}
+                        onChange={handleChange}
+                        required
+                    >
+                        <option value="">Select a Brand</option>
+                        {filteredBrands.map((brand, index) => (
+                            <option key={index} value={brand}>{brand}</option>
+                        ))}
+                    </select>
                 </label>
 
                 <label>
@@ -124,12 +154,13 @@ const ParkingForm = () => {
                 <label>
                     Parking Area:
                     <select name="parkingArea" value={formData.parkingArea} onChange={handleChange}>
-                        <option value="Area 1">Area 1</option>
-                        <option value="Area 2">Area 2</option>
-                        <option value="Area 3">Area 3</option>
-                        <option value="Area 4">Area 4</option>
-                        <option value="Area 5">Area 5</option>
-                        <option value="Area 6">Area 6</option>
+                        <option value="Main Campus">Main Campus</option>
+                        <option value="Tech Park">Tech Park</option>
+                        <option value="Tech Tower">Tech Tower</option>
+                        <option value="T.P Ganesan Auditorium">T.P Ganesan Auditorium</option>
+                        <option value="C.V Raman Block">C.V Raman Block</option>
+                        <option value="MBA Building">MBA Building</option>
+                        <option value="School Of Law">School Of Law</option>
                     </select>
                 </label>
 

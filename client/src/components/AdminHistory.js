@@ -44,7 +44,7 @@ const AdminHistory = () => {
             <div className="filter-section">
                 <div className="filters">
                     <input type="text" name="name" placeholder="Search by Name" value={filters.name} onChange={handleChange} />
-                    <select name="month" value={filters.month} onChange={handleChange}>
+                    {/* <select name="month" value={filters.month} onChange={handleChange}>
                         <option value="">Select Month</option>
                         <option value="1">January</option>
                         <option value="2">February</option>
@@ -58,7 +58,7 @@ const AdminHistory = () => {
                         <option value="10">October</option>
                         <option value="11">November</option>
                         <option value="12">December</option>
-                    </select>
+                    </select> */}
                     <input type="number" name="year" placeholder="Enter Year" value={filters.year} onChange={handleChange} />
                     <select name="status" value={filters.status} onChange={handleChange}>
                         <option value="">Select Status</option>

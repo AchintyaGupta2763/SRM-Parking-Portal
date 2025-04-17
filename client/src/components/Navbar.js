@@ -20,7 +20,7 @@ const Navbar = () => {
     return (
         <>
             <div className='navbar-heading'>
-                <h1>SRM PARKING PORTAL</h1>
+                <h1>SRM VISITOR PASS PORTAL</h1>
             </div>
             <nav className="navbar">
                 {/* Hamburger Menu for Mobile */}

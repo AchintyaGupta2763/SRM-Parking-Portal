@@ -1,3 +1,12 @@
+.page-container {
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* min-height: 100vh; */
+    /* align-items: center; */
+    /* height: 99vh; Full viewport height */
+    overflow: hidden;
+}
+
 .auth-container {
     max-width: 800px;
     margin: 40px auto;
@@ -71,4 +80,14 @@
 
 .auth-link a:hover {
     text-decoration: underline;
+}
+
+.auth-footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #f1f1f1;
+    color: #333;
+    font-size: 14px;
+    width: 100%;
+    margin-top: auto;
 }
