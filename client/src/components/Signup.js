@@ -119,6 +119,10 @@ const Signup = () => {
   return (
     <div className="page-container">
       <div className="auth-container">
+      <div className="logo-row">
+        <img src="srmFull.png" alt="Left Logo" className="logo left-logo" />
+        <img src="ctechFull.png" alt="Right Logo" className="logo right-logo" />
+      </div>
         <h1 className="auth-title">SRM VISITOR PASS PORTAL</h1>
         <h2 className="auth-title">Sign Up</h2>
         <form onSubmit={handleSubmit}>
@@ -210,10 +214,9 @@ const Signup = () => {
         {/* Footer */}
         <footer className="auth-footer">
           <p>
-            © {new Date().getFullYear()} SRM Institute Of Science And
-            Technology. All rights reserved. Contact:{" "}
-            <a href="mailto:parking@srmist.edu.in">parking@srmist.edu.in</a> |
-            Help Desk: <a href="tel:+911234567890">+91 1234567890</a>
+            © {new Date().getFullYear()} CTECH, SRMIST, KTR. Contact:{" "}
+            <a href="mailto:parkingsrm@gmail.com">parkingsrm@gmail.com</a> |
+            Help Desk: <a href="tel:044-4743-2350">044-4743-2350</a>
           </p>
           <p>
             📌 Our Team :- <a href="/documentation">Chronocyon</a>

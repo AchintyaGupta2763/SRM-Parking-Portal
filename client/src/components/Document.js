@@ -9,7 +9,7 @@ const teamMembers = [
     email: "achintyagupta1@gmail.com",
     phone: "+91 9452438229",
     github: "https://github.com/AchintyaGupta2763",
-    photo: "achintya.png"
+    photo: "achintya2.png"
   },
   {
     name: "Lavish Jhajhria",
@@ -18,7 +18,7 @@ const teamMembers = [
     email: "lavishjhajhria47@gmail.com",
     phone: "+91 9460778164",
     github: "https://github.com/Lavish-Jhajhria",
-    photo: "lavish.jpg"
+    photo: "lavish2.jpg"
   },
   {
     name: "Pratik",
@@ -46,8 +46,17 @@ const teamMembers = [
     phone: "+91 9753041066",
     github: "http://github.com/dhruvsharma06",
     photo: "dhruv.jpg"
+  },
+  {
+    name: "Dr. Santhanakrishnan C",
+    occupation: "Associate Professor in SRM University",
+    contribution: "Project Guide and Mentor",
+    email: "itsmedhruv06@gmail.com",
+    phone: "+91 9753041066",
+    github: "http://github.com/dhruvsharma06",
+    photo: "DrSanthanakrishnanC.png"
   }
-  // Add other 4 members similarly...
+
 ];
 
 const Documentation = () => {
@@ -62,13 +71,19 @@ const Documentation = () => {
               </div>
               <div className="team-info">
                 <h3>{member.name}</h3>
-                <p><strong>Occupation:</strong> {member.occupation}</p>
+                <p><strong>Designation:</strong> {member.occupation}</p>
                 <p><strong>Contribution:</strong> {member.contribution}</p>
-                <p><strong>Email:</strong> <a href={`mailto:${member.email}`}>{member.email}</a></p>
-                <p><strong>Phone:</strong> <a href={`tel:${member.phone}`}>{member.phone}</a></p>
-                <p><strong>GitHub:</strong> <a href={member.github} target="_blank" rel="noopener noreferrer">
-                  {member.github.replace(/^https?:\/\//, '')}
-                </a></p>
+                {
+                  member.name !== "Dr. Santhanakrishnan C" &&(
+                    <>
+                      <p><strong>Email:</strong> <a href={`mailto:${member.email}`}>{member.email}</a></p>
+                      {/* <p><strong>Phone:</strong> <a href={`tel:${member.phone}`}>{member.phone}</a></p> */}
+                      <p><strong>GitHub:</strong> <a href={member.github} target="_blank" rel="noopener noreferrer">
+                        {member.github.replace(/^https?:\/\//, '')}
+                      </a></p>                    
+                    </>
+                  )
+                }                
               </div>
             </div>
           ))}

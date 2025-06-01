@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 
+
 const generateToken = (userId) => {
     return jwt.sign({ id: userId }, process.env.JWT_SECRET, {
         expiresIn: '30d'
@@ -143,6 +144,7 @@ exports.generateOTP = async (req, res) => {
             message: 'OTP sent to your email'
         });
     } catch (error) {
+        console.error("Error sending OTP email:", error);
         res.status(500).json({
             success: false,
             message: 'Error generating OTP',

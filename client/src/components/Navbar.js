@@ -20,6 +20,10 @@ const Navbar = () => {
     return (
         <>
             <div className='navbar-heading'>
+            <div className="logo-row">
+                <img src="srmFull.png" alt="Left Logo" className="logo left-logo" />
+                <img src="ctechFull.png" alt="Right Logo" className="logo right-logo" />
+            </div>
                 <h1>SRM VISITOR PASS PORTAL</h1>
             </div>
             <nav className="navbar">
