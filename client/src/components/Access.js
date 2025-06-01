@@ -14,7 +14,7 @@ const Access = () => {
         setError("");
         try {
             const token = localStorage.getItem("token");
-            const response = await axios.get("http://localhost:5000/api/access/users", {
+            const response = await axios.get(`${process.env.REACT_APP_URL}/access/users`, {
                 headers: { Authorization: token },
                 params: filters,
             });
@@ -32,7 +32,7 @@ const Access = () => {
             const token = localStorage.getItem("token");
 
             await axios.put(
-                `http://localhost:5000/api/access/update-role/${id}`,
+                `${process.env.REACT_APP_URL}/access/update-role/${id}`,
                 { role: newRole },
                 { headers: { Authorization: token } }
             );

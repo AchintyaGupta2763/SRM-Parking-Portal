@@ -39,7 +39,7 @@ const AdminApproval = () => {
       }
 
       try {
-        const res = await axios.get("http://localhost:5000/api/admin/pending-requests", {
+        const res = await axios.get(`${process.env.REACT_APP_URL}/admin/pending-requests`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -96,7 +96,7 @@ const AdminApproval = () => {
 
     try {
       await axios.put(
-        `http://localhost:5000/api/admin/approve/${id}`,
+        `${process.env.REACT_APP_URL}/admin/approve/${id}`,
         { status: action, adminSignature: action === "approved" ? adminSignature : "" },
         { headers: { Authorization: `Bearer ${token}` } }
       );

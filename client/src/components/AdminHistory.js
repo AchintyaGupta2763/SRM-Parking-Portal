@@ -20,7 +20,7 @@ const AdminHistory = () => {
         setError("");
         try {
             const token = localStorage.getItem("token"); // Ensure token is included
-            const response = await axios.get("http://localhost:5000/api/admin-history/history", {
+            const response = await axios.get(`${process.env.REACT_APP_URL}/admin-history/history`, {
                 headers: { Authorization: `Bearer ${token}` },
                 params: filters,
             });

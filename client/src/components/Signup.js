@@ -68,7 +68,7 @@ const Signup = () => {
         let response;
         if (isOTPSignup) {
           response = await axios.post(
-            "http://localhost:5000/api/auth/verify-signup-otp",
+            `${process.env.REACT_APP_URL}/auth/verify-signup-otp`,
             {
               username: formData.username,
               email: formData.email,
@@ -76,7 +76,7 @@ const Signup = () => {
             }
           );
         } else {
-          response = await axios.post("http://localhost:5000/api/auth/signup", {
+          response = await axios.post(`${process.env.REACT_APP_URL}/auth/signup`, {
             username: formData.username,
             email: formData.email,
             password: formData.password,
@@ -104,7 +104,7 @@ const Signup = () => {
       return;
     }
     try {
-      await axios.post("http://localhost:5000/api/auth/signup-with-otp", {
+      await axios.post(`${process.env.REACT_APP_URL}/auth/signup-with-otp`, {
         username: formData.username,
         email: formData.email,
       });

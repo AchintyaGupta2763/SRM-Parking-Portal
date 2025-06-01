@@ -57,14 +57,14 @@ const Login = () => {
         let response;
         if (isOTPLogin) {
           response = await axios.post(
-            "http://localhost:5000/api/auth/verify-otp",
+            `${process.env.REACT_APP_URL}/auth/verify-otp`,
             {
               email: formData.email,
               otp: formData.otp,
             }
           );
         } else {
-          response = await axios.post("http://localhost:5000/api/auth/login", {
+          response = await axios.post(`${process.env.REACT_APP_URL}/auth/login`, {
             email: formData.email,
             password: formData.password,
           });
@@ -91,7 +91,7 @@ const Login = () => {
       return;
     }
     try {
-      await axios.post("http://localhost:5000/api/auth/generate-otp", {
+      await axios.post(`${process.env.REACT_APP_URL}/auth/generate-otp`, {
         email: formData.email,
       });
       alert("OTP sent to your email");

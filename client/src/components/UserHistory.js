@@ -34,7 +34,7 @@ const UserHistory = () => {
             }
 
             try {
-                const res = await axios.get("http://localhost:5000/api/user/user-requests", {
+                const res = await axios.get(`${process.env.REACT_APP_URL}/user/user-requests`, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
 

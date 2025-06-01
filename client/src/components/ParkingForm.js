@@ -42,7 +42,7 @@ const ParkingForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch("http://localhost:5000/api/parking/request", {
+            const response = await fetch(`${process.env.REACT_APP_URL}/parking/request`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData),
